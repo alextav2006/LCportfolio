@@ -618,6 +618,21 @@ justify-self: center;
 margin: 48px auto 0;
 }
 
+.modal-photo-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 8px;
+width: 100%;
+margin-top: 48px;
+}
+
+.modal-photo-grid .modal-photo {
+width: 100%;
+margin: 0;
+aspect-ratio: 1 / 1.35;
+object-fit: contain;
+}
+
 .close {
 position: absolute;
 top: 10px;
@@ -867,8 +882,16 @@ Desenvolvido por Fullstack Developer (Alexandre Taveira) •
 <a class="modal-fallback" :href="youtubeWatchUrl" target="_blank" rel="noopener noreferrer">
 Ver no YouTube
 </a>
+<div v-if="activeVideo.images" class="modal-photo-grid">
 <img
-v-if="activeVideo.image"
+v-for="image in activeVideo.images"
+:key="image"
+class="modal-photo"
+:src="image"
+:alt="'Imagem do projeto ' + activeVideo.title">
+</div>
+<img
+v-else-if="activeVideo.image"
 class="modal-photo"
 :src="activeVideo.image"
 :alt="'Imagem do projeto ' + activeVideo.title">
@@ -917,6 +940,7 @@ info: "Interpretação da personagem Leonor Barreiros com foco em comédia com r
 {
 video: "XNcxNZ7z1U0",
 title: "Os Desconectados",
+image: "desconectados.png",
 type: "Curta",
 role: "Papel: Participação em ensemble",
 year: "Ano: 2025",
@@ -926,6 +950,7 @@ info: "Trabalho de cena em grupo com foco em presença, ritmo e relação entre 
 {
 video: "d7hNkS-nI3I",
 title: "Imitose",
+image: "medica.png",
 type: "Curta",
 role: "Papel: Médica",
 year: "Ano: 2025",
@@ -935,6 +960,7 @@ info: "Interpretação de personagem médica com abordagem técnica e emocional 
 {
 video: "-lR2CKl7xQM",
 title: "Noite de Reis",
+images: ["nr_sacerdote.png", "nr_empregada.png", "nr_comandante.png"],
 type: "Peça de Teatro",
 role: "Papel: Comandante & Empregada Joana & Sacerdote",
 year: "Ano: 2025",
@@ -943,6 +969,7 @@ info: "Participação performativa com foco na expressão corporal e narrativa v
 {
 video: "Ko8pwa7etd8",
 title: "Liberdade em cena",
+images: ["libcena_povo.png", "libcena_mj.png"],
 type: "Peça de Teatro",
 role: "Papel: Povo & Maria João",
 year: "Ano: 2024",
@@ -951,6 +978,7 @@ info: "Trabalho de interpretação."
 {
 video: "jfID1cexurg",
 title: "Blur song 2",
+image: "blursong.png",
 type: "Videoclipe",
 role: "Papel: Participação artística",
 year: "Ano: 2024",
@@ -959,6 +987,7 @@ info: "Performance audiovisual com foco em presença cénica e continuidade emoc
 {
 video: "eCh_F0kNeRs",
 title: "Can´t Stop the Feeling!",
+image: "cstf.png",
 type: "Videoclipe",
 role: "Papel: Participação artística",
 year: "Ano: 2024",
