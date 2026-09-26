@@ -204,7 +204,7 @@ box-shadow: 0 8px 14px rgba(53, 13, 31, 0.25);
 
 .hero {
 display: grid;
-grid-template-columns: 1.2fr 0.8fr;
+grid-template-columns: 0.8fr 1.2fr;
 gap: 14px;
 margin-bottom: 22px;
 animation: rise 750ms ease both;
@@ -212,7 +212,7 @@ align-items: stretch;
 }
 
 .hero-main,
-.hero-side {
+.hero-skills {
 background:
 radial-gradient(circle at 92% 18%, rgba(255, 224, 176, 0.08), transparent 34%),
 linear-gradient(148deg, rgba(252, 244, 229, 0.82) 0%, rgba(242, 225, 191, 0.78) 52%, rgba(236, 214, 176, 0.74) 100%);
@@ -225,7 +225,6 @@ overflow: hidden;
 }
 
 .hero-main::before,
-.hero-side::before,
 .panel::before {
 content: "";
 position: absolute;
@@ -238,37 +237,37 @@ background: linear-gradient(90deg, var(--curtain) 0%, #9f3f3e 42%, var(--gold) 1
 
 .hero-main {
 display: grid;
+grid-template-columns: minmax(0, 1fr) clamp(110px, 13vw, 150px);
 gap: 8px;
+align-content: start;
 }
 
-.hero-side ul {
-margin: 0;
-padding-left: 0;
-list-style: none;
-display: grid;
-gap: 10px;
-color: #37272f;
+.hero-main > .eyebrow,
+.hero-main > h1 {
+grid-column: 1;
 }
 
-.hero-side li {
-padding: 7px 9px 7px 28px;
-border-radius: 8px;
-position: relative;
-background: rgba(255, 248, 234, 0.34);
-border: 1px solid rgba(166, 123, 74, 0.22);
+.hero-main > p:not(.eyebrow) {
+grid-column: 1 / -1;
 }
 
-.hero-side li::before {
-content: "";
-position: absolute;
-left: 10px;
-top: 50%;
-width: 9px;
-height: 9px;
+.hero-portrait {
+grid-column: 2;
+grid-row: 1 / span 2;
+width: 100%;
+aspect-ratio: 1;
+border: 3px solid #e21d2b;
 border-radius: 50%;
-transform: translateY(-50%);
-background: radial-gradient(circle at 35% 35%, #ffe4b3 0%, #b66449 66%, #7a2438 100%);
-box-shadow: 0 0 0 2px rgba(182, 100, 73, 0.15);
+background-color: rgba(255, 248, 234, 0.2);
+background-image: url("assets/foto-leonor.jpg");
+background-position: center;
+background-size: cover;
+align-self: center;
+}
+
+.hero > #competencias {
+margin-bottom: 0;
+animation: none;
 }
 
 .eyebrow {
@@ -705,12 +704,23 @@ justify-content: flex-start;
 grid-template-columns: 1fr;
 }
 
+.hero-main {
+grid-template-columns: minmax(0, 1fr);
+}
+
+.hero-portrait {
+grid-column: 1;
+grid-row: auto;
+justify-self: center;
+width: clamp(120px, 40vw, 170px);
+}
+
 .cv-wrap {
 align-items: flex-start;
 }
 
 .hero-main,
-.hero-side {
+.hero-skills {
 border-radius: 16px;
 }
 }
@@ -742,16 +752,10 @@ Sou a Leonor Carvalho e estou a tirar um curso de representação.
 Este espaço reúne uma parte do meu percurso e dos projetos onde participei,
 sempre com foco em interpretação autêntica, disciplina criativa e crescimento contínuo.
 </p>
+<div class="hero-portrait" role="img" aria-label="Espaço reservado para fotografia de Leonor Carvalho"></div>
 </article>
-<aside class="hero-side" aria-label="Pontos principais de perfil">
-<p class="eyebrow">Resumo rápido</p>
-<ul>
-<li v-for="point in profilePoints" :key="point">{{ point }}</li>
-</ul>
-</aside>
-</section>
 
-<section id="competencias" class="panel">
+<section id="competencias" class="panel hero-skills">
 <h2 class="section-title">Competências</h2>
 <p>
 Trabalho técnico e expressivo desenvolvido em contexto académico e de palco,
@@ -760,6 +764,7 @@ com especial atenção ao corpo, à voz e à construção de personagem.
 <div class="skills-grid">
 <article class="skill-card" v-for="skill in skills" :key="skill">{{ skill }}</article>
 </div>
+</section>
 </section>
 
 <section id="videos" class="panel">
@@ -854,12 +859,6 @@ navLinks: [
 activeSection: "#quem",
 videoFilter: "Todos",
 videoFilters: ["Todos", "Curta", "Peça de Teatro", "Videoclipe"],
-profilePoints: [
-"Formação ativa em representação.",
-"Experiência em peças de teatro e videoclipes.",
-"Interesse em papéis dramáticos e narrativas contemporâneas.",
-"Disponível para castings e colaborações artísticas."
-],
 skills: [
 "Interpretação dramática e composição de personagem",
 "Expressão corporal, presença em palco e marcação cénica",
