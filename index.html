@@ -256,12 +256,11 @@ grid-column: 2;
 grid-row: 1 / span 2;
 width: 100%;
 aspect-ratio: 1;
-border: 3px solid #e21d2b;
+display: block;
+border: 3px solid var(--curtain);
 border-radius: 50%;
-background-color: rgba(255, 248, 234, 0.2);
-background-image: url("assets/foto-leonor.jpg");
-background-position: center;
-background-size: cover;
+object-fit: cover;
+object-position: center 20%;
 align-self: center;
 }
 
@@ -316,6 +315,10 @@ padding: clamp(20px, 2.6vw, 28px);
 box-shadow: var(--shadow);
 position: relative;
 overflow: hidden;
+}
+
+.panel.cv-panel {
+background: linear-gradient(175deg, rgba(247, 237, 217, 0.72) 0%, rgba(238, 222, 193, 0.68) 100%);
 }
 
 .section-title {
@@ -752,7 +755,7 @@ Sou a Leonor Carvalho e estou a tirar um curso de representação.
 Este espaço reúne uma parte do meu percurso e dos projetos onde participei,
 sempre com foco em interpretação autêntica, disciplina criativa e crescimento contínuo.
 </p>
-<div class="hero-portrait" role="img" aria-label="Espaço reservado para fotografia de Leonor Carvalho"></div>
+<img class="hero-portrait" src="lc_foto.png" alt="Fotografia de Leonor Carvalho">
 </article>
 
 <section id="competencias" class="panel hero-skills">
@@ -806,7 +809,7 @@ tabindex="0"
 </transition-group>
 </section>
 
-<section id="cv" class="panel">
+<section id="cv" class="panel cv-panel">
 <h2 class="section-title">Download do Curriculum Vitae</h2>
 <div class="cv-wrap">
 <p>
